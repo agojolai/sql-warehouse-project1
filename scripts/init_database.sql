@@ -1,0 +1,48 @@
+
+/*
+=================================================
+CREATE DATABASE AND SCHEMAS
+=================================================
+
+SCRIPT PURPOSE:
+	THIS SCRIPT CREATES A NEW DATABASE CALLED 'DATAWAREHOUSE' AFTER CHECKING IF IT ALREADY 
+	EXISTS. IF THE DATABASE EXISTS, IT WILL BE DROPPED AND RECREATED. AFTER THE RECREATED 
+	DATABASE, THREE SCHEMAS ARE SET UP: 'BRONZE', 'SILVER', AND 'GOLD'.
+
+WARNING: 
+	RUNNING THIS SCRIPT WILL DELETE YOUR "DATAWAREHOUSE" DATABASE IF IT EXISTS.
+	PROCEED WITH CAUTION
+
+*/
+
+-- notes by me: 
+-- execute by highlighting
+
+USE master;
+GO 
+
+-- Drop and recreate the 'DataWarehouse' database
+IF EXISTS(SELECT 1 FROM sys.databases WHERE name = 'DataWarehouse')
+BEGIN
+	ALTER DATABASE DataWarehouse SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+	DROP DATABASE DataWarehouse; 
+END;
+GO
+
+
+CREATE DATABASE DataWarehouse;
+GO
+
+USE DataWarehouse;
+GO
+
+--create schemas
+
+ CREATE SCHEMA bronze;
+ GO
+
+ CREATE SCHEMA silver;
+ GO
+
+ CREATE SCHEMA gold;
+ GO
